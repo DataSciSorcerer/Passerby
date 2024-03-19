@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "SNOW";
+    src: url("./assets/fonts/SnowburstOne-Regular.ttf");
+}
