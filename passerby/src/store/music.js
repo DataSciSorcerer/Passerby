@@ -7,63 +7,62 @@ export const music = defineStore("music", {
     playList: [
       {
         title: "I Hear a Rhapsody",
-        img: "/src/assets/music/Bill Evans _Jim Hall - I Hear a Rhapsody/Bill Evans _Jim Hall - I Hear a Rhapsody.jpg",
+        img: "/music/Bill Evans _Jim Hall - I Hear a Rhapsody/Bill Evans _Jim Hall - I Hear a Rhapsody.jpg",
         sound:
-          "/src/assets/music/Bill Evans _Jim Hall - I Hear a Rhapsody/Bill Evans _ Jim Hall - I Hear a Rhapsody.mp3",
+          "/music/Bill Evans _Jim Hall - I Hear a Rhapsody/Bill Evans _ Jim Hall - I Hear a Rhapsody.mp3",
         introduce: "None",
       },
       {
         title: "Love at First Sight",
-        img: "/src/assets/music/iwamizu - Love at First Sight/iwamizu - Love at First Sight.jpg",
+        img: "/music/iwamizu - Love at First Sight/iwamizu - Love at First Sight.jpg",
         sound:
-          "/src/assets/music/iwamizu - Love at First Sight/iwamizu - Love at First Sight.mp3",
+          "/music/iwamizu - Love at First Sight/iwamizu - Love at First Sight.mp3",
         introduce: "None",
       },
       {
         title: "february",
-        img: "/src/assets/music/luvbird - february/luvbird - february.jpg",
-        sound: "/src/assets/music/luvbird - february/luvbird - february.mp3",
+        img: "/music/luvbird - february/luvbird - february.jpg",
+        sound: "/music/luvbird - february/luvbird - february.mp3",
         introduce: "None",
       },
       {
         title: "デート",
-        img: "/src/assets/music/RADWIMPS - デート/RADWIMPS - デート.jpg",
-        sound: "/src/assets/music/RADWIMPS - デート/RADWIMPS - デート.mp3",
+        img: "/music/RADWIMPS - デート/RADWIMPS - デート.jpg",
+        sound: "/music/RADWIMPS - デート/RADWIMPS - デート.mp3",
         introduce: "None",
       },
       {
         title: "海の見える街",
-        img: "/src/assets/music/Rasmus Faber - 海の見える街/Rasmus Faber - 海の見える街.jpg",
+        img: "/music/Rasmus Faber - 海の見える街/Rasmus Faber - 海の見える街.jpg",
         sound:
-          "/src/assets/music/Rasmus Faber - 海の見える街/Rasmus Faber - 海の見える街.mp3",
+          "/music/Rasmus Faber - 海の見える街/Rasmus Faber - 海の見える街.mp3",
         introduce: "None",
       },
       {
         title: "銀河鉄道999",
-        img: "/src/assets/music/Rasmus Faber - 銀河鉄道999 (银河铁道999)/Rasmus Faber - 銀河鉄道999 (银河铁道999).jpg",
+        img: "/music/Rasmus Faber - 銀河鉄道999 (银河铁道999)/Rasmus Faber - 銀河鉄道999 (银河铁道999).jpg",
         sound:
-          "/src/assets/music/Rasmus Faber - 銀河鉄道999 (银河铁道999)/Rasmus Faber - 銀河鉄道999 (银河铁道999).mp3",
+          "/music/Rasmus Faber - 銀河鉄道999 (银河铁道999)/Rasmus Faber - 銀河鉄道999 (银河铁道999).mp3",
         introduce: "None",
       },
       {
         title: "Ágúst",
-        img: "/src/assets/music/Ólafur Arnalds - Ágúst/Ólafur Arnalds - Ágúst.jpg",
-        sound:
-          "/src/assets/music/Ólafur Arnalds - Ágúst/Ólafur Arnalds - Ágúst.mp3",
+        img: "/music/Ólafur Arnalds - Ágúst/Ólafur Arnalds - Ágúst.jpg",
+        sound: "/music/Ólafur Arnalds - Ágúst/Ólafur Arnalds - Ágúst.mp3",
         introduce: "None",
       },
       {
         title: "Merry Christmas Mr_ Lawrence",
-        img: "/src/assets/music/坂本龙一 - Merry Christmas Mr_ Lawrence (劳伦斯先生圣诞快乐_圣诞快乐，劳伦斯先生) (Inst_)/坂本龙一 - Merry Christmas Mr_ Lawrence (劳伦斯先生圣诞快乐_圣诞快乐，劳伦斯先生) (Inst_).jpg",
+        img: "/music/坂本龙一 - Merry Christmas Mr_ Lawrence (劳伦斯先生圣诞快乐_圣诞快乐，劳伦斯先生) (Inst_)/坂本龙一 - Merry Christmas Mr_ Lawrence (劳伦斯先生圣诞快乐_圣诞快乐，劳伦斯先生) (Inst_).jpg",
         sound:
-          "/src/assets/music/坂本龙一 - Merry Christmas Mr_ Lawrence (劳伦斯先生圣诞快乐_圣诞快乐，劳伦斯先生) (Inst_)/坂本龙一 - Merry Christmas Mr_ Lawrence (劳伦斯先生圣诞快乐_圣诞快乐，劳伦斯先生) (Inst_).mp3",
+          "/music/坂本龙一 - Merry Christmas Mr_ Lawrence (劳伦斯先生圣诞快乐_圣诞快乐，劳伦斯先生) (Inst_)/坂本龙一 - Merry Christmas Mr_ Lawrence (劳伦斯先生圣诞快乐_圣诞快乐，劳伦斯先生) (Inst_).mp3",
         introduce: "圣诞快乐🎄",
       },
       {
         title: "Sweet Rumors",
-        img: "/src/assets/music/麗美 (Remedios) - Sweet Rumors/麗美 (Remedios) - Sweet Rumors.jpg",
+        img: "/music/麗美 (Remedios) - Sweet Rumors/麗美 (Remedios) - Sweet Rumors.jpg",
         sound:
-          "/src/assets/music/麗美 (Remedios) - Sweet Rumors//麗美 (Remedios) - Sweet Rumors.mp3",
+          "/music/麗美 (Remedios) - Sweet Rumors//麗美 (Remedios) - Sweet Rumors.mp3",
         introduce: "None",
       },
     ],
