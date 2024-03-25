@@ -8,3 +8,5 @@
 <script setup>
 import TopBar from "../../components/TopBar/TopBar.vue"
 </script>
+<style scoped>
+</style>

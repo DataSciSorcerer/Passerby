@@ -4,7 +4,7 @@
         <div class="form">
             <!-- Title -->
             <div class="title">
-                <span class="z-10 mx-auto">{{ useLanguageStore.pages[currentPath][nowLanguage].title }}</span>
+                <span class="mx-auto">{{ useLanguageStore.pages[currentPath][nowLanguage].title }}</span>
                 <!-- <LottieAnimation :animation-data="snowman" :loop="true" class="text-1xl" /> -->
             </div>
             <!-- avatar -->
@@ -24,7 +24,7 @@
                 </div>
                 <div class="tooltip tooltip-bottom" :data-tip=useLanguageStore.pages[currentPath][nowLanguage].tipSex>
                     <label class="swap swap-flip text-4xl">
-                        <input type="checkbox" v-model="sex" @click="sexAvatar(true)" />
+                        <input type="checkbox" v-model="sex" @click="sexAvatar" />
                         <div class="swap-on">👦🏻</div>
                         <div class="swap-off">👧🏻</div>
                     </label>
@@ -43,7 +43,7 @@ import { storeToRefs } from 'pinia'
 import { language } from "../../store/language"
 import router from "../../router/index.js"
 import { ref } from "vue"
-import { randomAvatarChar } from '../../until/randonAvatarChar.js'
+import { avatarList, hashAvatar, randomAvatarChar } from "../../until/avatar.js"
 
 
 // Multi-language
@@ -53,36 +53,34 @@ const currentPath = router.currentRoute.value.path.substring(7); // 当前路由
 
 
 // Change avatar
+// false = female
 const name = ref("");
-const avatar = ref("https://joesch.moe/api/v1/Ebmaj9")
+const avatar = ref("../../../public/avatar/jenni.svg")
 const sex = ref(true)
 
 
 // Use random change avatar
 const randomAvatar = () => {
+    const sexValue = sex.value ? "female" : "male"
     name.value = ""
     name.value = randomAvatarChar()
-    avatar.value = "https://joesch.moe/api/v1/" + (sex.value ? "female" : "male") + "/" + name.value;
-    console.log(avatar.value);
+    const hashValue = hashAvatar(name.value, avatarList[sexValue].length - 1)
+    avatar.value = `../../../public/avatar/${avatarList[sexValue][hashValue]}.svg`
 }
 
 
-const sexAvatar = (updateSex = false) => {
-    if (updateSex) {
-        sex.value = !sex.value;
-    }
-    avatar.value = "https://joesch.moe/api/v1/" + (sex.value ? "female" : "male") + "/" + name.value;
-    console.log(sex.value + name.value)
+const sexAvatar = () => {
+    sex.value = !sex.value
+    const sexValue = sex.value ? "female" : "male"
+    const hashValue = hashAvatar(name.value, avatarList[sexValue].length - 1)
+    avatar.value = `../../../public/avatar/${avatarList[sexValue][hashValue]}.svg`
 }
 
 
 // Use input change avatar
 const inputAvatar = () => {
-    avatar.value = "https://joesch.moe/api/v1/" + (sex.value ? "female" : "male") + "/" + name.value;
-
-    if (name.value == "") {
-        avatar.value = "https://joesch.moe/api/v1/Ebmaj9"
-    }
+    const sexValue = sex.value ? "female" : "male"
+    avatar.value = `../../../public/avatar/${avatarList[sexValue][hashAvatar(name.value, avatarList[sexValue].length - 1)]}.svg`
 }
 </script>
 

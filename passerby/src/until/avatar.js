@@ -1,3 +1,57 @@
+const avatarList = {
+  female: [
+    "jocelyn",
+    "jaqueline",
+    "jabala",
+    "jeri",
+    "josephine",
+    "jenni",
+    "jess",
+    "jeane",
+    "jazebelle",
+    "jane",
+    "jodi",
+    "julie",
+  ],
+  male: [
+    "jed",
+    "jacques",
+    "jack",
+    "josh",
+    "jake",
+    "jana",
+    "jai",
+    "joe",
+    "jon",
+    "jean",
+    "james",
+    "jordan",
+    "jerry",
+    "jude",
+    "jia",
+  ],
+};
+
+const hash = (input) => {
+  let hash = 0;
+  for (let i = 0; i < input.length; i++) {
+    hash = (hash << 5) + hash + input.charCodeAt(i);
+    hash = hash & hash;
+  }
+  return hash;
+};
+
+/**
+ * 将给定的输入字符串哈希并将结果限制在指定范围内。
+ * @param {string} input - 要哈希的输入字符串。
+ * @param {number} n - 范围的上限值，哈希结果将在0到n之间。
+ * @returns {number} - 限制在0到n之间的哈希结果。
+ */
+const hashAvatar = (input, n) => {
+  const hashedValue = hash(input);
+  return Math.abs(hashedValue) % (n + 1);
+};
+
 var firstName = [
   "机智",
   "聪慧",
@@ -553,4 +607,4 @@ const randomAvatarChar = () => {
   return fullName;
 };
 
-export { randomAvatarChar };
+export { avatarList, hashAvatar, randomAvatarChar };

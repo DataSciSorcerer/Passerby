@@ -34,8 +34,10 @@
             <div class="modal-box p-0">
                 <div class="card lg:card-side bg-base-100 shadow-xl">
                     <figure><img :src="useMusicStore.playList[nowMusic].img" alt="Album" />
+
                     </figure>
                     <div class="card-body pt-7 pb-7">
+
                         <h2 class="card-title">{{ useMusicStore.playList[nowMusic].title }}</h2>
                         <p>{{ useMusicStore.playList[nowMusic].introduce }}</p>
                         <div class="card-actions justify-evenly flex-nowrap whitespace-nowrap">
@@ -48,12 +50,16 @@
                     </div>
                 </div>
             </div>
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
         </dialog>
         <!-- change language -->
-        <div class="tooltip tooltip-bottom" :data-tip=useLanguageStore.pages[currentPath][nowLanguage].tipChangeLanguage>
-            <details class="dropdown">
+        <div class="tooltip tooltip-bottom"
+            :data-tip=useLanguageStore.pages[currentPath][nowLanguage].tipChangeLanguage>
+            <details class="dropdown z-20">
                 <summary class="m-1 btn btn-ghost ml-2 btn-circle"><icon-translate size="26" /></summary>
-                <ul class="p-2 shadow menu dropdown-content z-20 bg-base-100 rounded-box w-48">
+                <ul class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-48">
                     <li @click="useLanguageStore.changeLanguage('zh')"><a class="text-xl">🀄中文</a></li>
                     <li @click="useLanguageStore.changeLanguage('fr')"><a class="text-xl">🍷France</a></li>
                     <li @click="useLanguageStore.changeLanguage('en')"><a class="text-xl">🗽English</a></li>
@@ -82,7 +88,7 @@
 // import { onMounted } from 'vue';
 // import { LottieAnimation } from 'lottie-web-vue';
 // import snowman from '../../assets/lottie/snowman.json';
-import { background } from '../../components/Particlesjs/particles';
+import { background } from '../../until/background/particles.js';
 import { loadSlim } from 'tsparticles-slim';
 import { ref } from "vue"
 import router from "../../router/index.js"
