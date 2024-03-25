@@ -6,8 +6,8 @@ export default {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: true,
-    darkTheme: "black",
+    themes: ["black", "dracula"],
+    darkTheme: false,
     base: true,
     styled: true,
     utils: true,

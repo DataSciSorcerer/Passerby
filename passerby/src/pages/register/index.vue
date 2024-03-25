@@ -30,7 +30,7 @@
                     </label>
                 </div>
                 <div class="tooltip tooltip-bottom" :data-tip=useLanguageStore.pages[currentPath][nowLanguage].tipStart>
-                    <button class="btn btn-outline z-10">➡️</button>
+                    <button class="btn btn-outline z-10" @click="">➡️</button>
                 </div>
             </div>
         </div>
@@ -39,51 +39,46 @@
 
 
 <script setup>
-import { storeToRefs } from 'pinia'
-import { language } from "../../store/language"
-import router from "../../router/index.js"
-import { ref } from "vue"
-import { avatarList, hashAvatar, randomAvatarChar } from "../../until/avatar.js"
+import { storeToRefs } from 'pinia';
+import { language } from "../../store/language";
+import router from "../../router/index.js";
+import { ref, onMounted, inject } from "vue";
+import { avatarList, hashAvatar, randomAvatarChar } from "../../until/avatar.js";
 
+//socketIO
+const socket = inject('socket');
 
 // Multi-language
 const useLanguageStore = language();
-const { nowLanguage } = storeToRefs(useLanguageStore) // 当前语言(响应式解构)
+const { nowLanguage } = storeToRefs(useLanguageStore); // 当前语言(响应式解构)
 const currentPath = router.currentRoute.value.path.substring(7); // 当前路由
-
 
 // Change avatar
 // false = female
 const name = ref("");
-const avatar = ref("../../../public/avatar/jenni.svg")
-const sex = ref(true)
-
+const avatar = ref("/avatar/jenni.svg");
+const sex = ref(true);
 
 // Use random change avatar
 const randomAvatar = () => {
-    const sexValue = sex.value ? "female" : "male"
-    name.value = ""
-    name.value = randomAvatarChar()
-    const hashValue = hashAvatar(name.value, avatarList[sexValue].length - 1)
-    avatar.value = `../../../public/avatar/${avatarList[sexValue][hashValue]}.svg`
-}
-
-
-const sexAvatar = () => {
-    sex.value = !sex.value
-    const sexValue = sex.value ? "female" : "male"
-    const hashValue = hashAvatar(name.value, avatarList[sexValue].length - 1)
-    avatar.value = `../../../public/avatar/${avatarList[sexValue][hashValue]}.svg`
-}
-
+    const sexValue = sex.value ? "female" : "male";
+    name.value = randomAvatarChar();
+    const hashValue = hashAvatar(name.value, avatarList[sexValue].length - 1);
+    avatar.value = `/avatar/${avatarList[sexValue][hashValue]}.svg`;
+};
 
 // Use input change avatar
 const inputAvatar = () => {
-    const sexValue = sex.value ? "female" : "male"
-    avatar.value = `../../../public/avatar/${avatarList[sexValue][hashAvatar(name.value, avatarList[sexValue].length - 1)]}.svg`
-}
-</script>
+    const sexValue = sex.value ? "female" : "male";
+    avatar.value = `../../../public/avatar/${avatarList[sexValue][hashAvatar(name.value, avatarList[sexValue].length - 1)]}.svg`;
+};
 
+// User into connect SocketIO
+onMounted(() => {
+    socket.emit("userInto", "Hello");
+    console.log("yes")
+});
+</script>
 
 <style scoped>
 .content {

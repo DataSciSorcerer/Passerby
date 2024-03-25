@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@icon-park/vue-next": "^1.4.2",
+    "cors": "^2.8.5",
     "lottie-web-vue": "^2.0.7",
     "pinia": "^2.1.7",
+    "socket.io-client": "^4.7.5",
     "tsparticles-slim": "^2.12.0",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5",
