@@ -1,7 +1,7 @@
 <template>
     <!-- main -->
     <div class="content">
-        <div class="form">
+        <div class="form" v-if="showForm">
             <!-- Title -->
             <div class="title">
                 <span class="mx-auto">{{ useLanguageStore.pages[currentPath][nowLanguage].title }}</span>
@@ -30,10 +30,16 @@
                     </label>
                 </div>
                 <div class="tooltip tooltip-bottom" :data-tip=useLanguageStore.pages[currentPath][nowLanguage].tipStart>
-                    <button class="btn btn-outline z-10" @click="">➡️</button>
+                    <button class="btn btn-outline z-10" @click="toChat">➡️</button>
                 </div>
             </div>
         </div>
+        <div class="animation  z-10" v-if="!showForm" style="font-size: 80px;text-align: center;">
+            <h1 class="mb-5" style="font-family: 'SNOW';">Matching</h1>
+            <LottieAnimation :animation-data="matchHeart" :loop="true" />
+            <button class="btn btn-outline btn-sm" @click="cancelMatch">Cancel</button>
+        </div>
+
     </div>
 </template>
 
@@ -44,6 +50,10 @@ import { language } from "../../store/language";
 import router from "../../router/index.js";
 import { ref, onMounted, inject } from "vue";
 import { avatarList, hashAvatar, randomAvatarChar } from "../../until/avatar.js";
+import { LottieAnimation } from "lottie-web-vue"
+import matchHeart from "../../../public/lottie/matchHeart.json"
+
+const showForm = ref(true)
 
 //socketIO
 const socket = inject('socket');
@@ -78,6 +88,25 @@ onMounted(() => {
     socket.emit("userInto", "Hello");
     console.log("yes")
 });
+
+// Match
+const toChat = () => {
+    showForm.value = false
+
+    socket.emit("userMatch", {
+        sex: sex.value ? "female" : "male",
+        id: socket.id
+    })
+}
+
+//Cancel match
+const cancelMatch = () => {
+    showForm.value = true
+
+    socket.emit("userCancelMatch", {
+        id: socket.id
+    })
+}
 </script>
 
 <style scoped>
