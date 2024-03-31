@@ -97,6 +97,10 @@ const toChat = () => {
         sex: sex.value ? "female" : "male",
         id: socket.id
     })
+
+    socket.on("matchSuccess", (Info) => {
+        console.log(Info)
+    })
 }
 
 //Cancel match
