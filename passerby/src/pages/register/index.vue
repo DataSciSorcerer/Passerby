@@ -100,6 +100,9 @@ const toChat = () => {
 
     socket.on("matchSuccess", (Info) => {
         console.log(Info)
+        if(Info){
+            router.push("/index/chat")
+        }
     })
 }
 
