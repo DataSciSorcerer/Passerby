@@ -5,4 +5,14 @@ import vue from "@vitejs/plugin-vue";
 export default defineConfig({
   plugins: [vue()],
   base: "./",
+  build: {
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console
+          : true,
+        drop_debugger: true,
+      },
+    },
+  },
 });

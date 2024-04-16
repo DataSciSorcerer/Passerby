@@ -34,7 +34,7 @@ function matchAndRemove() {
     const femaleIndex = females.shift();
 
     const pair = [matchList[maleIndex], matchList[femaleIndex]];
-    matchSuccessful.push(pair);
+    matchSuccessful.push(pair); // 将匹配成功的用户对添加到 matchSuccessful 数组中一次
 
     // 移除匹配成功的用户
     matchList.splice(Math.max(maleIndex, femaleIndex), 1);
@@ -54,61 +54,64 @@ function matchAndRemove() {
 
   while (matchList.length >= 2) {
     const pair = [matchList[0], matchList[1]];
-    matchSuccessful.push(pair);
+    matchSuccessful.push(pair); // 将匹配成功的用户对添加到 matchSuccessful 数组中一次
     matchList.splice(0, 2);
 
     io.to(pair[0].socketId).emit("matchSuccess", formatMatchSuccess(pair[1]));
     io.to(pair[1].socketId).emit("matchSuccess", formatMatchSuccess(pair[0]));
+
+    // 建立一对一的单聊
+
   }
 
   // 清空matchList中的用户socketId，以防止内存泄漏
   matchList.forEach((user) => delete user.socketId);
-}
+  console.log("match successful:", matchSuccessful);
 
-function calculateMatchWaitTime() {
-  const baseWaitTime = 2500;
-  const maxWaitTime = 10000;
-  const lengthRatio = Math.min(matchList.length / 5, 1);
-  return baseWaitTime + lengthRatio * (maxWaitTime - baseWaitTime);
-}
+  function calculateMatchWaitTime() {
+    const baseWaitTime = 2500;
+    const maxWaitTime = 10000;
+    const lengthRatio = Math.min(matchList.length / 5, 1);
+    return baseWaitTime + lengthRatio * (maxWaitTime - baseWaitTime);
+  }
 
-function formatMatchSuccess(user) {
-  return {
-    sex: user.sex,
-    socketId: user.socketId // 只发送性别和socketId
-  };
-}
+  function formatMatchSuccess(user) {
+    return {
+      sex: user.sex,
+      socketId: user.socketId // 只发送性别和socketId
+    };
+  }
 
-io.on("connection", (socket) => {
-  user.push(socket.id);
-  console.log(user)
-  adminUserCount(); // 新用户连接时发送在线用户数量给管理员
+  io.on("connection", (socket) => {
+    user.push(socket.id);
+    // console.log(user)
+    adminUserCount(); // 新用户连接时发送在线用户数量给管理员
 
-  socket.on("disconnect", () => {
-    user.splice(user.indexOf(socket.id), 1);
-    adminUserCount(); // 用户断开连接时发送在线用户数量给管理员
+    socket.on("disconnect", () => {
+      user.splice(user.indexOf(socket.id), 1);
+      adminUserCount(); // 用户断开连接时发送在线用户数量给管理员
+    });
+
+    socket.on("userMatch", (info) => {
+      info.socketId = socket.id; // 存储用户的socketId
+      matchList.push(info); // 将新用户添加到匹配列表中
+      const waitTime = calculateMatchWaitTime();
+
+      setTimeout(() => {
+        matchAndRemove(); // 进行匹配并移除操作
+      }, waitTime);
+    });
+
+    socket.on("userCancelMatch", (info) => {
+      matchList.splice(
+        matchList.findIndex((user) => user.id === info.id),
+        1
+      );
+    });
   });
-
-  socket.on("userMatch", (info) => {
-    info.socketId = socket.id; // 存储用户的socketId
-    matchList.push(info); // 将新用户添加到匹配列表中
-
-    const waitTime = calculateMatchWaitTime();
-
-    setTimeout(() => {
-      matchAndRemove(); // 进行匹配并移除操作
-    }, waitTime);
-  });
-
-  socket.on("userCancelMatch", (info) => {
-    matchList.splice(
-      matchList.findIndex((user) => user.id === info.id),
-      1
-    );
-  });
-});
-
+}
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log(`Socket.IO server listening on port ${PORT}`);
 });
+
